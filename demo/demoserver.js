@@ -73,7 +73,20 @@ io.on("connection", (socket) => {
       hostSocket.emit("liveTracking", guestLocation, count);
     }
   });
+
+  socket.on("stopSharing", function (room) {
+    try {
+      console.log("[socket]", "leave room :", room);
+      socket.leave(room);
+      socket.to(room).emit("user left", socket.id);
+    } catch (e) {
+      console.log("[error]", "leave room :", e);
+      socket.emit("error", "couldnt perform requested action");
+    }
+  });
 });
+
+
 
 /* ERROR HANDLING ****************** */
 
