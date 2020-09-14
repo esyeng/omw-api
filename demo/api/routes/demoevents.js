@@ -12,9 +12,37 @@ const { demoUser, demoEvent, Trip } = models;
 // });
 
 // /* GET ALL * MY HOSTED ? GUESTED ?? * EVENTS ************************** */
-events.get("/", async (req, res, next) => {
+events.get("/:userId", async (req, res, next) => {
   try {
-    const allEvents = await demoEvent.findAll(); // Include hosted and attending/invited to as guest through TRIPS
+    const id = req.params.userId;
+
+    const myEvents = await demoEvent.findAll({
+      attributes: [
+        "id",
+        "title",
+        "date",
+        "time",
+        "description",
+        "latitude",
+        "longitude",
+      ],
+      include: [
+        {
+          model: demoUser,
+          as: "guest",
+          attributes: [
+            "id",
+            "firstName",
+            "lastName",
+            "email",
+            "latitude",
+            "longitude",
+          ],
+          through: { attributes: [] }, //  <== Here
+          required: true,
+        },
+      ],
+    }); // Include hosted and attending/invited to as guest through TRIPS
     res.json(allEvents); // SEE LIST OF GUESTS
   } catch (err) {
     next(err);
