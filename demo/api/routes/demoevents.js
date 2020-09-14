@@ -15,7 +15,7 @@ const { demoUser, demoEvent, Trip } = models;
 events.get("/:userId", async (req, res, next) => {
   try {
     const id = req.params.userId;
-
+//comment
     const myEvents = await demoEvent.findAll({
       attributes: [
         "id",
