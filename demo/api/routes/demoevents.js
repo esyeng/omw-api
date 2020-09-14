@@ -43,7 +43,7 @@ events.get("/:userId", async (req, res, next) => {
         },
       ],
     }); // Include hosted and attending/invited to as guest through TRIPS
-    res.json(allEvents); // SEE LIST OF GUESTS
+    res.json(myEvents); // SEE LIST OF GUESTS
   } catch (err) {
     next(err);
   }
