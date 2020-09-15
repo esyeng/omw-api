@@ -82,17 +82,17 @@ const users = [
 ];
 
 const events = [
-  {
-    id: 1,
-    latitude: 40.705286,
-    longitude: -74.009233,
-    date: "2020-09-17",
-    time: "08:00:00",
-    title: "Kani's Dance Class",
-    description: "Kani's modern dance on highway 280",
-    status: "Inactive",
-    hostId: 1,
-  },
+  // {
+  //   id: 1,
+  //   latitude: 40.705286,
+  //   longitude: -74.009233,
+  //   date: "2020-09-17",
+  //   time: "08:00:00",
+  //   title: "Kani's Dance Class",
+  //   description: "Kani's modern dance on highway 280",
+  //   status: "Inactive",
+  //   hostId: 1,
+  // },
   {
     id: 2,
     latitude: 40.703286,
@@ -131,13 +131,8 @@ const seed = async () => {
       if (event.title === "Max's Party") {
         const user1 = await demoUser.findByPk(2);
         const user2 = await demoUser.findByPk(3);
-        const user3 = await demoUser.findByPk(4);
         const add1 = await newEvent.addGuest(user1);
         const add2 = await newEvent.addGuest(user2);
-        const add3 = await newEvent.addGuest(user3);
-      } else if (event.title === "Kani's Dance Class") {
-        const user = await demoUser.findByPk(2);
-        const addUs = await newEvent.addGuest(user);
       }
 
     }))
